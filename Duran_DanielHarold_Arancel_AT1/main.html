@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="result" id="result" readonly>
+    <div class="buttons">
+      <button onclick="clearHistory()">Clear History</button>
+      <button onclick="clearResult()">Clear</button>
+      <button onclick="deleteLast()">Delete</button>
+      <button onclick="addToResult('**')">^</button>
+      <button onclick="addToResult('7')">7</button>
+      <button onclick="addToResult('8')">8</button>
+      <button onclick="addToResult('9')">9</button>
+      <button onclick="addToResult('/')">/</button>
+      <button onclick="addToResult('4')">4</button>
+      <button onclick="addToResult('5')">5</button>
+      <button onclick="addToResult('6')">6</button>
+      <button onclick="addToResult('*')">*</button>
+      <button onclick="addToResult('1')">1</button>
+      <button onclick="addToResult('2')">2</button>
+      <button onclick="addToResult('3')">3</button>
+      <button onclick="addToResult('-')">-</button>
+      <button onclick="addToResult('0')">0</button>
+      <button onclick="addToResult('.')">.</button>
+      <button onclick="calculateResult()">=</button>
+      <button onclick="addToResult('+')">+</button>
+      
+    </div>
+    <div class="history" id="history"></div>
+  </div>
+  <script>
+    function addToResult(value) {
+      document.getElementById("result").value += value;
+    }
+
+    function clearResult() {
+      document.getElementById("result").value = "";
+    }
+
+    function clearHistory() {
+      document.getElementById("history").innerHTML = "";
+    }
+
+    function deleteLast() {
+      var currentValue = document.getElementById("result").value;
+      document.getElementById("result").value = currentValue.slice(0, -1);
+    }
+
+    function calculateResult() {
+      var expression = document.getElementById("result").value;
+      var result;
+      try {
+        result = eval(expression);
+      } catch (error) {
+        result = "Error";
+      }
+      document.getElementById("history").innerHTML += "<div>" + expression + " = " + result + "</div>";
+      document.getElementById("result").value = result;
+    }
+  </script>
+</body>
+</html>
